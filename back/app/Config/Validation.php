@@ -43,16 +43,16 @@ class Validation
         'nombre'=>'required|alpha',
         'status'=>'required',
         'categoria'=>'required',
-        'tag'=>'required',
-        'photoUrl'=>'required'
+        'tag'=>'required'
+
     ];
 
-    public $mascotasPUT=[
+    /* public $mascotasPUT=[
 
         'nombre'=>'required|alpha',
         'status'=>'required',
         'categoria'=>'required',
-    ];
+    ]; */
 
 
 

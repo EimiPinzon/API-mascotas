@@ -1,8 +1,21 @@
 .banner{
     width: 1100px;
-    height: 150px;
+    height: 200px;
 }
 
-.formulario{
+.espaciador{
     padding-top: 2em;
+}
+
+.idModal{
+    display: block;
+}
+
+.btnEliminar{
+    margin-left: 2em;
+}
+
+.file{
+    padding: 2px;
+    margin-left: 1em;
 }

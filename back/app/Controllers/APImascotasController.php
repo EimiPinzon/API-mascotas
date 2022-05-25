@@ -35,11 +35,11 @@ class APImascotasController extends ResourceController
         //3. validacion
 
         if($this->validate('mascotas')){
-            $this->model->insert($datosEnvio);
+            $consulta = $this->model->insert($datosEnvio);
 
-            $mensaje=array('estado'=>true,'mensaje'=>"se ha agregado la mascota exitosamente");
+            /* $mensaje=array('estado'=>true,'mensaje'=>"se ha agregado la mascota exitosamente"); */
 
-            return $this->respond($mensaje);
+            return $this->respond($consulta);
 
         }else{
 
@@ -53,37 +53,46 @@ class APImascotasController extends ResourceController
 
     public function editarMascota($id){
 
-        $datosPeticion=$this->request->getRawInput();
+        /* $datosPeticion=$this->request->getJSON(); */
 
-        $nombre = $datosPeticion["nombre"];
-        $status = $datosPeticion["status"];
-        $categoria = $datosPeticion["categoria"];
-        $tag = $datosPeticion["tag"];
-        $photoUrl = $datosPeticion["photoUrl"];
-
+        $nombre = $this->request->getVar('nombre');
+        $status = $this->request->getVar('status');
+        $categoria = $this->request->getVar('categoria');
 
         $datosEnvio = array(
 
+            "nombre" => $nombre,
             "status" => $status,
-            "categoria" => $categoria,
+            "categoria" => $categoria
 
         );
+        $consulta = $this->model->update($id,$datosEnvio);
 
-        if($this->validate('mascotasPUT')){
-            $this->model->update($id,$datosEnvio);
+        $mensaje=array('estado'=>true,'mensaje'=>"se ha editado la mascota exitosamente");
 
-            $mensaje=array('estado'=>true,'mensaje'=>"se ha editado la mascota exitosamente");
+        return $this->respond($consulta);
+/*         if($this->validate('mascotasPUT')){
 
-            return $this->respond($mensaje);
 
         }else{
 
             $validation =  \Config\Services::validation();
-            return $this->respond($validation->getErrors(),400);
-        }
+        } */
+    }
 
-        return $this->respond($datosEnvio);
 
-        
+    public function eliminarMascota($id){
+
+        $consulta = $this->model->where('id', $id)->delete();
+
+        return $this->respond($consulta);
+           
+    }
+
+    public function infoMascota($id){
+
+        $consulta = $this->model->where('id', $id)->findAll();
+
+        return $this->respond($consulta);
     }
 }

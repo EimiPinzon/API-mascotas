@@ -33,9 +33,11 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
-$routes->get('/prueba', 'APImascotasController::buscarMascota');
+$routes->get('/mascotas', 'APImascotasController::buscarMascota');
 $routes->post('/nuevo', 'APImascotasController::registrarMascota');
-$routes->put('/editar/(:any)', 'APImascotasController::editarMascota/$2');
+$routes->put('/editar/(:any)', 'APImascotasController::editarMascota/$1');
+$routes->delete('/eliminar/(:any)', 'APImascotasController::eliminarMascota/$1');
+$routes->get('/info/(:any)', 'APImascotasController::infoMascota/$1');
 
 /*
  * --------------------------------------------------------------------
